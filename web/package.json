@@ -1,0 +1,19 @@
+{
+  "name": "greenhouse-server",
+  "version": "0.0.1",
+  "description": "Using AI and IoT to help grow food in remote greenhouses",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Gerrit Niezen",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "node-json2html": "^2.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

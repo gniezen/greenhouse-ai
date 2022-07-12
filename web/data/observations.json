@@ -1,0 +1,12 @@
+{
+  "1": {
+    "date": "2022-07-12",
+    "time": "23:03",
+    "observation": "Plant is healthy"
+  },
+  "2": {
+    "date": "2022-08-12",
+    "time": "23:06",
+    "observation": "Plant may have early blight"
+  }
+}
