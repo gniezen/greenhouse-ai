@@ -6,7 +6,8 @@ const observationRoutes = (app, fs) => {
   let template = {"<>":"tr","html":[
         {"<>":"td","html":"${date}"},
         {"<>":"td","html":"${time}"},
-        {"<>":"td","html":"${observation}"}
+        {"<>":"td","html":"${observation}"},
+        {"<>":"td","html":"${battery} V"}
       ]};
 
   // refactored helper methods
@@ -44,7 +45,10 @@ const observationRoutes = (app, fs) => {
   app.get('/observations', (req, res) => {
     readFile(data => {
       const sorted = [];
-      Object.keys(data).sort().map(key => sorted.push(data[key])); // sort by timestamp
+      Object.keys(data).sort().map(key => {
+      	data[key].battery /= 1000;
+      	sorted.push(data[key]); // sort by timestamp
+      }); 
       
       let html = `
       	<!doctype html>
@@ -62,6 +66,7 @@ const observationRoutes = (app, fs) => {
     	        <th scope="col">Date</th>
     	        <th scope="col">Time</th>
     	        <th scope="col">Observation</th>
+    	        <th scope="col">Battery</th>
     	       </tr>
     	    </thead>
       	    <tbody>
