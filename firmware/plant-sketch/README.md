@@ -1,6 +1,6 @@
 The firmware is based on the [4G LTE Connected Smart Wildlife Camera](https://github.com/edgeimpulse/ei-spresense-4g-wildlife-camera) provided by Edge Impulse.
 
-- Create an [Edge Impulse](https://github.com/edgeimpulse/ei-spresense-4g-wildlife-camera/blob/main/www.edgeimpulse.com) account
+- Create an [Edge Impulse](https://edgeimpulse.com) account
 - Install the [Arduino IDE](https://www.arduino.cc/en/software)
 - Install the [Spresense Arduino Library](https://developer.sony.com/develop/spresense/docs/arduino_set_up_en.html#_install_spresense_arduino_library)
 - In `Tools->Board` select the `Spresense` device, then under `Tools->Memory` select `1536(kB)`.
