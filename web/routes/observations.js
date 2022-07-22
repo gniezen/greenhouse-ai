@@ -42,7 +42,7 @@ const observationRoutes = (app, fs) => {
   };
 
   // READ
-  app.get('/observations', (req, res) => {
+  app.get('/', (req, res) => {
     readFile(data => {
       const sorted = [];
       Object.keys(data).sort().map(key => {
