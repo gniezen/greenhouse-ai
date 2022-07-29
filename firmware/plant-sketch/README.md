@@ -5,7 +5,7 @@ The firmware is based on the [4G LTE Connected Smart Wildlife Camera](https://gi
 - Install the [Spresense Arduino Library](https://developer.sony.com/develop/spresense/docs/arduino_set_up_en.html#_install_spresense_arduino_library)
 - In `Tools->Board` select the `Spresense` device, then under `Tools->Memory` select `1536(kB)`.
 - Clone this repo
-- From Edge Impulse, clone the TODO!!!! repository
+- From Edge Impulse, clone the [plant-diseases](https://studio.edgeimpulse.com/public/117043/latest) repository
 - In your cloned Edge Impulse project, select `Arduino Library` and click `build`. Follow the instructions to add this library to your Arduino IDE
 - In the Arduino IDE, click `File->Ope`n and then navigate to `greenhouse-ai` repository folder, and open the `plan-sketch.ino` file
 - Build the project to verify it compiles correctly

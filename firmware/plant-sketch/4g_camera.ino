@@ -294,11 +294,21 @@ void ei_camera_snapshot(bool debug)
 {
   char filename[200];
   char json[400];
+
+  if (data.type == 0) {
+    Serial.println("Time from GPS not yet valid.");
+    theCamera.end();
+    return;
+  }
+
+  Serial.println("Getting time and voltage");
+  RtcTime rtc = RTC.getTime();
+  batteryVoltage = LowPower.getVoltage();
   
   // snapshot and save a jpeg
   CamImage img = theCamera.takePicture();
   if (theSD.begin() && img.isAvailable()) {
-    sprintf(filename, "PLANT.%s.jpg", names);
+    sprintf(filename, "PLANT.%s.%lu.jpg", names, rtc.unixtime());
     if (debug) ei_printf("INFO: saving %s to SD card...\n", filename);
     theSD.remove(filename);
     File myFile = theSD.open(filename, FILE_WRITE);
@@ -307,11 +317,6 @@ void ei_camera_snapshot(bool debug)
   } else if (debug) {
     Serial.println("failed to compress and save image, check that camera and SD card are connected properly");
   }
-
-  Serial.println("Getting time and voltage");
-
-  RtcTime rtc = RTC.getTime();
-  batteryVoltage = LowPower.getVoltage();
 
   Serial.println("Building JSON");
 
@@ -355,12 +360,13 @@ void ei_camera_snapshot(bool debug)
 
   // if there are incoming bytes available
   // from the server, read them and print them:
-  if (int len = client.available() && debug) {
+  while (int len = client.available() && debug) {
     char buff[len + 1];
     buff[len] = '\0';
     client.read((uint8_t*)buff, len);
     Serial.print(buff);
   }
+  Serial.print("\n");
 
   Serial.println("Going to deep sleep..");
   LowPower.deepSleep(20800); // sleep for 3 hours

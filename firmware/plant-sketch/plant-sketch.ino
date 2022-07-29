@@ -2,10 +2,12 @@
 #include <SDHCI.h>
 #include <RTC.h>
 #include <LowPower.h>
+#include <GNSS.h>
 
 #define DEBUG true
 static SDClass  theSD;
 static int batteryVoltage;
+static SpNavData data;
 
 void setup() {
   if (DEBUG) {
@@ -34,7 +36,6 @@ void setup() {
   setupGnss();
   if (DEBUG) Serial.println("INFO: gnss started");
 
-  sleep(5000); // TODO: change to deep sleep
   // device attempts to connect to cellular
   ei_camera_connect_cellular(DEBUG);
 
@@ -43,9 +44,6 @@ void setup() {
 }
 
 void loop() {
-
-  // Serial.println("Going to deep sleep..");
-  // LowPower.deepSleep(3);
   // this routine is used to validate when we have valid GNSS data
   // camera video feed events have generally been paused if this is running
   if (!loopGnss()) {
@@ -58,11 +56,13 @@ void loop() {
     Serial.println("gnss update:");
     Serial.println(sprintNavData());
   }
+
+  sleep(60);
   
   // retry cellular connection
-  // ei_camera_connect_cellular(DEBUG);
+  Serial.println("Reconnect cellular..");
+  ei_camera_connect_cellular(DEBUG);
   // restart continuously classifying video feed at 5fps
-  // sleep(5000);
-  // Serial.println("Attempting to restart camera");
-  // ei_camera_start_continuous(DEBUG);
+  Serial.println("Start streaming again..");
+  ei_camera_start_continuous(DEBUG);
 }
