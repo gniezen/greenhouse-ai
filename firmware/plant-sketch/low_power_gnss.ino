@@ -110,6 +110,11 @@ void setupGnss() {
   Gnss.start(HOT_START);
 }
 
+void shutdownGnss() {
+  Gnss.stop();
+  Gnss.end();
+}
+
 /*
  * Fetch updates until we reach GNSS_MIN_UPDATE_CNT valid ones
  */

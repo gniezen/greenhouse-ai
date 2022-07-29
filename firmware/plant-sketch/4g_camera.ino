@@ -368,6 +368,11 @@ void ei_camera_snapshot(bool debug)
   }
   Serial.print("\n");
 
+  Serial.println("Shutting down LTE");
+  lteAccess.shutdown();
+  Serial.println("Shutting down GPS");
+  shutdownGnss();
+
   Serial.println("Going to deep sleep..");
   LowPower.deepSleep(20800); // sleep for 3 hours
 }
