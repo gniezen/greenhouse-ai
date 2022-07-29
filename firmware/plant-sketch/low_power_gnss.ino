@@ -43,14 +43,13 @@ bool updateRtc(SpGnssTime *satTime) {
   RtcTime gps(satTime->year, satTime->month, satTime->day,
               satTime->hour, satTime->minute, satTime->sec,
               satTime->usec * 1000);
-  Serial.println("Updating RTC");
 
   /* Sanity check */
   if (gps.unixtime() < ref_time.unixtime()) {
     return false;
   }
 
-  Serial.println("Syncing time");
+  Serial.println("Syncing time.");
 
   /* Sync RTC with GPS time */
   if (abs((int)gps - (int)rtc) >= 1) {
@@ -68,8 +67,6 @@ bool getGnssUpdate() {
   Serial.println("Waiting for GNSS update.");
   if (Gnss.waitUpdate()) {
     Gnss.getNavData(&data);
-
-    ei_printf("posDataExist %d posFixMode %d type %d\n", data.posDataExist, data.posFixMode, data.type);
 
     /* Check that we got data that is not cached etc. but from GNSS (type 1) */
     if (data.posDataExist && data.posFixMode && data.type == 1) {

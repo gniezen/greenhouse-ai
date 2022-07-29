@@ -63,8 +63,8 @@ const observationRoutes = (app, fs) => {
       	    <table class="table">
     	    <thead>
     	       <tr>
-    	        <th scope="col">Date</th>
-    	        <th scope="col">Time</th>
+    	        <th scope="col">Date (UTC)</th>
+    	        <th scope="col">Time (UTC)</th>
     	        <th scope="col">Observation</th>
     	        <th scope="col">Battery</th>
     	       </tr>
